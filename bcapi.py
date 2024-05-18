@@ -7,7 +7,7 @@ def obtener_tasa_de_cambio():
         tipo_de_cambio = siete.cuadro(
             series=["F073.TCO.PRE.Z.D"],
             nombres=["tipo_de_cambio_dolar"],
-            desde="2024-01-01",  
+            desde="2023-01-01",  
             hasta="2024-12-01",
             frecuencia="D",
             observado={"tipo_de_cambio_dolar": "last"}

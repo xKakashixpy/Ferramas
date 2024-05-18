@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Moneda</title>
+    <script>
+        async function convertirMoneda() {
+            const monto = document.getElementById('monto').value;
+            const moneda = document.getElementById('moneda').value;
+            const datos = { monto: monto, moneda: moneda };
+
+            try {
+                const response = await fetch('/convertir', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('resultado').innerText = `Resultado: ${result.resultado}`;
+                } else {
+                    document.getElementById('resultado').innerText = `Error: ${result.error}`;
+                }
+            } catch (error) {
+                document.getElementById('resultado').innerText = `Error: ${error}`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Conversor de Moneda</h1>
+    <form onsubmit="event.preventDefault(); convertirMoneda();">
+        <label for="monto">Monto en USD:</label>
+        <input type="number" id="monto" name="monto" step="0.01" required>
+        <br><br>
+        <label for="moneda">Convertir a:</label>
+        <select id="moneda" name="moneda" required>
+            <option value="CLP">Peso Chileno (CLP)</option>
+            <!-- Puedes agregar más opciones de monedas aquí -->
+        </select>
+        <br><br>
+        <button type="submit">Convertir</button>
+    </form>
+    <br>
+    <div id="resultado"></div>
+</body>
+</html>
