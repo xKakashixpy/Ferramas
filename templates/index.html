@@ -81,6 +81,7 @@
                     Stock: ${item.stock}<br>
                     Categoria: ${item.categoria}<br>
                     <button onclick="deleteItem('${item.id}')">Eliminar</button>
+                    <button onclick="pagarProducto('${item.id}', '${item.nombre}', '${item.precio}')">Pagar</button>
                 `;
                 itemsContainer.appendChild(itemDiv);
             });
@@ -94,6 +95,20 @@
             if (response.ok) {
                 loadItems();
             }
+        }
+
+        function pagarProducto(id, nombre, precio) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/iniciar_pago';
+            form.innerHTML = `
+                <input type="hidden" name="buy_order" value="${id}">
+                <input type="hidden" name="session_id" value="${nombre}">
+                <input type="hidden" name="amount" value="${precio}">
+                <input type="hidden" name="return_url" value="http://localhost:5000/confirmacion">
+            `;
+            document.body.appendChild(form);
+            form.submit();
         }
 
         document.addEventListener('DOMContentLoaded', loadItems);
