@@ -1,7 +1,25 @@
 import bcapi
 from flask import Flask, render_template, request, jsonify
+from firebase_config import db
+
 
 app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/add', methods=['POST'])
+def add_item():
+    data = request.json
+    db.collection('items').add(data)
+    return jsonify({"success": True}), 200
+
+@app.route('/get', methods=['GET'])
+def get_items():
+    items = db.collection('items').stream()
+    result = [item.to_dict() for item in items]
+    return jsonify(result), 200
 
 @app.route('/tipocambio')
 def conversor():

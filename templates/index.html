@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramas Main</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ferramas Main</h1>
+        <form id="addItemForm">
+            <input type="text" id="nombre" placeholder="nombre" required>
+            <input type="number" id="precio" placeholder="precio" required>
+            <input type="text" id="descripcion" placeholder="descripcion" required>
+            <input type="number" id="stock" placeholder="stock" required>
+            <input type="text" id="categoria" placeholder="categoria" required>
+            <button type="submit">Agregar producto</button>
+        </form>
+        <h2>Productos</h2>
+        <div id="itemsContainer"></div>
+    </div>
+    <script>
+        document.getElementById('addItemForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const precio = document.getElementById('precio').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const stock = document.getElementById('stock').value;
+            const categoria = document.getElementById('categoria').value;
+
+            const response = await fetch('/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nombre, precio, descripcion, stock, categoria })
+            });
+
+            if (response.ok) {
+                document.getElementById('nombre').value = '';
+                document.getElementById('precio').value = '';
+                document.getElementById('descripcion').value = '';
+                document.getElementById('stock').value = '';
+                document.getElementById('categoria').value = '';
+                loadItems();
+            }
+        });
+
+        async function loadItems() {
+            const response = await fetch('/get');
+            const items = await response.json();
+
+            const itemsContainer = document.getElementById('itemsContainer');
+            itemsContainer.innerHTML = '';
+            items.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'item';
+                itemDiv.innerHTML = `<strong>${item.nombre}</strong><br>Precio: $${item.precio} <br>Descripcion: ${item.descripcion} <br>stock: ${item.stock} <br>categoria: ${item.categoria}`;
+                itemsContainer.appendChild(itemDiv);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadItems);
+    </script>
+</body>
+</html>
