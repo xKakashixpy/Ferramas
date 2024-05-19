@@ -1,8 +1,7 @@
 from DataBase import FirebaseDB
-from DataBase import add_item, get_items
 
 path ="project_credentials.json"
-url ="https://integracion-aa12c-default-rtdb.firebaseio.com/"
+url ="https://integracion-aa12c-default-rtdb.firebaseio.com"
 
 fb_db = FirebaseDB(path,url)
 

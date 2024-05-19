@@ -23,11 +23,3 @@ class FirebaseDB:
     def delete_record(self, path):
         ref = db.reference(path)
         ref.delete()
-
-def add_item(data):
-    db.collection('items').add(data)
-
-def get_items():
-    items = db.collection('items').stream()
-    return [item.to_dict() for item in items]
-
