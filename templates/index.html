@@ -18,6 +18,9 @@
             padding: 10px;
             margin: 10px 0;
         }
+        .item button {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -70,9 +73,27 @@
             items.forEach(item => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'item';
-                itemDiv.innerHTML = `<strong>${item.nombre}</strong><br>Precio: $${item.precio} <br>Descripcion: ${item.descripcion} <br>stock: ${item.stock} <br>categoria: ${item.categoria}`;
+                itemDiv.innerHTML = `
+                    <strong>ID: ${item.id}</strong><br>
+                    Nombre: ${item.nombre}<br>
+                    Precio: $${item.precio}<br>
+                    Descripcion: ${item.descripcion}<br>
+                    Stock: ${item.stock}<br>
+                    Categoria: ${item.categoria}<br>
+                    <button onclick="deleteItem('${item.id}')">Eliminar</button>
+                `;
                 itemsContainer.appendChild(itemDiv);
             });
+        }
+
+        async function deleteItem(id) {
+            const response = await fetch(`/delete/${id}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                loadItems();
+            }
         }
 
         document.addEventListener('DOMContentLoaded', loadItems);

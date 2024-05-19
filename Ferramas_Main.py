@@ -18,15 +18,29 @@ def index():
 @app.route('/add', methods=['POST'])
 def add_item():
     data = request.json
-    db.collection('items').add(data)
+    new_ref = db.push(data)
+    data['id'] = new_ref.key
+    new_ref.update({'id': new_ref.key})
     return jsonify({"success": True}), 200
 
 @app.route('/get', methods=['GET'])
 def get_items():
-    items = db.collection('items').stream()
-    result = [item.to_dict() for item in items]
+    items = db.get()
+    result = []
+    if items:
+        for key, value in items.items():
+            result.append(value)
     return jsonify(result), 200
 
+@app.route('/delete/<item_id>', methods=['DELETE'])
+def delete_item(item_id):
+    db.child(item_id).set(None)
+    return jsonify({"success": True}), 200
+
+
+
+
+#----------------Aplicacion tipo de Cambio----
 @app.route('/tipocambio')
 def conversor():
     tasa_usd_clp = bcapi.obtener_tasa_de_cambio("2024-12-01")  # Ejemplo de fecha

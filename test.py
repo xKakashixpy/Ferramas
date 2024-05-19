@@ -15,7 +15,7 @@ try:
     # Escribir datos de prueba
     ref.set({
         'test': {
-            'message': 'probando base!'
+            'message': 'probando base3!'
         }
     })
     
