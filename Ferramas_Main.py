@@ -34,8 +34,9 @@ def get_items():
 
 @app.route('/delete/<item_id>', methods=['DELETE'])
 def delete_item(item_id):
-    db.child(item_id).set(None)
+    db.child(item_id).delete()
     return jsonify({"success": True}), 200
+
 
 
 
