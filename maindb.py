@@ -13,24 +13,3 @@ data_to_write = {
 'categoria': 'esmeril'
 }
 fb_db.write_record('/herramientas/esmeril', data_to_write)
-
-
-
-def main():
-    # Add a new item
-    item = {
-        'nombre': 'Sample Item',
-        'precio': 100,
-        'descripcion': '',
-        'stock': 1,
-        'categoria': ''
-    }
-    add_item(item)
-
-    # Get all items
-    items = get_items()
-    for item in items:
-        print(item)
-
-if __name__ == '__main__':
-    main()
