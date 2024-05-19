@@ -9,6 +9,7 @@
             const monto = document.getElementById("monto").value;
             const moneda1 = document.getElementById("moneda1").value;
             const moneda2 = document.getElementById("moneda2").value;
+            const fecha = document.getElementById("fecha").value;
 
             const response = await fetch('/convertir', {
                 method: 'POST',
@@ -18,7 +19,8 @@
                 body: JSON.stringify({
                     monto: parseFloat(monto),
                     moneda1: moneda1,
-                    moneda2: moneda2
+                    moneda2: moneda2,
+                    fecha: fecha
                 })
             });
 
@@ -42,6 +44,10 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text">$</span>
                             <input type="number" id="monto" class="form-control" placeholder="Ingrese monto" aria-label="Amount (to the nearest dollar)" required>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Fecha</span>
+                            <input type="date" id="fecha" class="form-control" required>
                         </div>
                         <div class="mb-3 d-flex justify-content-between">
                             <select id="moneda1" class="form-select" aria-label="Default select example">

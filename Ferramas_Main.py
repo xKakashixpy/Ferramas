@@ -3,13 +3,11 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-# Ruta para mostrar el conversor de moneda
 @app.route('/tipocambio')
 def conversor():
-    tasa_usd_clp = bcapi.obtener_tasa_de_cambio()
+    tasa_usd_clp = bcapi.obtener_tasa_de_cambio("2024-12-01")  # Ejemplo de fecha
     return render_template('tipocambio.html', tasa_usd_clp=tasa_usd_clp)
 
-# Ruta para manejar la conversión de moneda
 @app.route('/convertir', methods=['POST'])
 def convertir():
     try:
@@ -17,7 +15,8 @@ def convertir():
         monto = float(datos['monto'])
         moneda1 = datos['moneda1']
         moneda2 = datos['moneda2']
-        tasa_usd_clp = bcapi.obtener_tasa_de_cambio()
+        fecha = datos['fecha']
+        tasa_usd_clp = bcapi.obtener_tasa_de_cambio(fecha)
         
         if tasa_usd_clp:
             if moneda1 == "usd" and moneda2 == "clp":

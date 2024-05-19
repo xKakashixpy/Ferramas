@@ -1,18 +1,21 @@
 import bcchapi
 
-def obtener_tasa_de_cambio():
+def obtener_tasa_de_cambio(fecha):
     try:
         siete = bcchapi.Siete("ba.vidals@duocuc.cl", "Wani-gushi007")
         tipo_de_cambio = siete.cuadro(
             series=["F073.TCO.PRE.Z.D"],
             nombres=["tipo_de_cambio_dolar"],
-            desde="2024-01-01",  
-            hasta="2024-12-01",
+            desde=fecha,  
+            hasta=fecha,
             frecuencia="D",
             observado={"tipo_de_cambio_dolar": "last"}
         )
-        tasa = tipo_de_cambio['tipo_de_cambio_dolar'].iloc[-1]
-        return tasa
+        if not tipo_de_cambio.empty:
+            tasa = tipo_de_cambio['tipo_de_cambio_dolar'].iloc[-1]
+            return tasa
+        else:
+            return None
     except Exception as e:
         print("Error al obtener la tasa de cambio:", e)
         return None
