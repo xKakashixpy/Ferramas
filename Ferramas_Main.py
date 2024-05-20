@@ -1,12 +1,12 @@
-import bcapi
+from APIs import bcapi
 from flask import Flask, render_template, request, jsonify
-from webpayplus import transaction
+from APIs.webpayplus import transaction
 from transbank.webpay.webpay_plus.transaction import Transaction
 from transbank.common.options import WebpayOptions
 from transbank.common.integration_type import IntegrationType
 from transbank.common.integration_commerce_codes import IntegrationCommerceCodes
 from transbank.common.integration_api_keys import IntegrationApiKeys
-from firebase_config import db
+from BD.firebase_config import db
 
 
 app = Flask(__name__)
