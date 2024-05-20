@@ -5,27 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor de Moneda</title>
     <style>
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #000;
+            --font-family-sans: 'Verdana', 'Geneva', 'Tahoma', sans-serif;
+            --font-family-serif: 'Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', serif;
+        }
         body {
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-            background-color: rgba(75, 71, 65, 0.74);
+            font-family: sans-serif;
+            background-color: rgba(255, 255, 255, 0.74);
             margin-bottom: auto;
         }
-        h1{
+        h1 {
             font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
-        h2{
+        h2 {
             font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        p {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         }
         .container {
             max-width: 800px;
-            margin: 20 auto;
+            margin: 0 auto;
             padding: 20px;
         }
-        p{
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
         }
-        
-        
+        table, th, td {
+            border: 1px solid #dddddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .footer-container {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-family-sans);
+        }
+        button a {
+            color: #fff;
+            text-decoration: none;
+        }
+
     </style>
     <script>
         async function convertir() {
@@ -57,46 +101,62 @@
     </script>
 </head>
 <body>
-    <button><a href="/">Volver</a></button>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title text-center">Conversor de Moneda</h2>
-                        <p>Tasa actual del dólar: {{ tasa_usd_clp }}</p>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">$</span>
-                            <input type="number" id="monto" class="form-control" placeholder="Ingrese monto" aria-label="Amount (to the nearest dollar)" required>
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">Fecha</span>
-                            <input type="date" id="fecha" class="form-control" required>
-                        </div>
-                        <div class="mb-3 d-flex justify-content-between">
-                            <select id="moneda1" class="form-select" aria-label="Default select example">
-                                <option selected></option>
-                                <option value="usd">USD - Dólar Estadounidense</option>
-                                <option value="clp">CLP - Peso Chileno</option>
-                            </select>
-                            <span class="px-2 align-self-center">a</span>
-                            <select id="moneda2" class="form-select" aria-label="Default select example">
-                                <option selected></option>
-                                <option value="clp">CLP - Peso Chileno</option>
-                                <option value="usd">USD - Dólar Estadounidense</option>
-                            </select>
-                        </div>
-                        <button onclick="convertir()" type="button" class="btn btn-primary w-100">Convertir</button>
+        <button><a href="/">Volver</a></button>
+        <h2 class="text-center">Conversor de Moneda</h2>
+        <p>Tasa actual del dólar: {{ tasa_usd_clp }}</p>
+        <table>
+            <tr>
+                <td>Monto</td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" id="monto" class="form-control" placeholder="Ingrese monto" aria-label="Amount (to the nearest dollar)" required>
                     </div>
-                    <div class="mb-3 text-center">
-                        <p id="resultado"></p>
+                </td>
+            </tr>
+            <tr>
+                <td>Fecha</td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-text">Fecha</span>
+                        <input type="date" id="fecha" class="form-control" required>
                     </div>
-                </div>
-            </div>
-        </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Moneda Origen</td>
+                <td>
+                    <select id="moneda1" class="form-select" aria-label="Default select example">
+                        <option selected></option>
+                        <option value="usd">USD - Dólar Estadounidense</option>
+                        <option value="clp">CLP - Peso Chileno</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Moneda Destino</td>
+                <td>
+                    <select id="moneda2" class="form-select" aria-label="Default select example">
+                        <option selected></option>
+                        <option value="clp">CLP - Peso Chileno</option>
+                        <option value="usd">USD - Dólar Estadounidense</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button onclick="convertir()" type="button" class="btn btn-primary w-100">Convertir</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    <p id="resultado"></p>
+                </td>
+            </tr>
+        </table>
     </div>
-    <br>
-    <div class="footer-container bg-dark text-white text-center py-4">
+    <div class="footer-container">
         <div class="custom-container">
             <span>© 2024 Todos los derechos reservados</span>
         </div>

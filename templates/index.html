@@ -5,58 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ferramas</title>
     <style>
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #000;
+            --font-family-sans: 'Verdana', 'Geneva', 'Tahoma', sans-serif;
+            --font-family-serif: 'Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', serif;
+        }
+
         body {
-            font-family: sans-serif;
-            background-color: rgba(88, 48, 14, 0.74);
-            margin-bottom: auto;
+            font-family: var(--font-family-sans);
+            background-color: rgba(255, 255, 255, 0.74);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        input{
-            border: 1px solid #000000;
-            padding: 10px;
-            margin: 2px 0;
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-            background-color: rgb(236, 216, 208);
-            
-        }
-        h1{
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
-        h2{
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-        }
+
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            width: 100%;
             padding: 20px;
-            
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
         }
-        .item {
-            border: 1px solid #000000;
+
+        h1, h2 {
+            font-family: var(--font-family-sans);
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            border: 1px solid var(--secondary-color);
             padding: 10px;
-            margin: 10px 0;
+            font-family: var(--font-family-serif);
+            background-color: var(--primary-color);
         }
+
+        button {
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-family-sans);
+        }
+
+        button a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .item {
+            border: 1px solid var(--secondary-color);
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: var(--primary-color);
+        }
+
         .item button {
             margin-top: 10px;
-        }
-        .item_text{
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-            font-palette: dark;
+            margin-right: 5px;
         }
     </style>
 </head>
 <body>
-
-    
     <div class="container">
         <button><a href="tipocambio">Conversor</a></button>
-        <h1>Ferramas</h1><br><br><br>
+        <h1>Ferramas</h1>
         <h2>Lista de productos</h2>
         <form id="addItemForm">
             <input type="text" class="item_text" id="nombre" placeholder="Nombre" required>
             <input type="number" class="item_text" id="precio" placeholder="Precio" required>
-            <input type="text" class="item_text" id="descripcion" placeholder="Descripcion" required>
+            <input type="text" class="item_text" id="descripcion" placeholder="Descripción" required>
             <input type="number" class="item_text" id="stock" placeholder="Stock" required>
-            <input type="text" class="item_text" id="categoria" placeholder="Categoria" required>
+            <input type="text" class="item_text" id="categoria" placeholder="Categoría" required>
             <button type="submit">Agregar producto</button>
         </form>
         <h2>Productos</h2>
@@ -102,9 +133,9 @@
                     <strong>ID: ${item.id}</strong><br>
                     Nombre: ${item.nombre}<br>
                     Precio: $${item.precio}<br>
-                    Descripcion: ${item.descripcion}<br>
+                    Descripción: ${item.descripcion}<br>
                     Stock: ${item.stock}<br>
-                    Categoria: ${item.categoria}<br>
+                    Categoría: ${item.categoria}<br>
                     <button onclick="deleteItem('${item.id}')">Eliminar</button>
                     <button onclick="pagarProducto('${item.id}', '${item.nombre}', '${item.precio}')">Pagar</button>
                 `;

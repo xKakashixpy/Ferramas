@@ -1,8 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmación de Transacción</title>
-    <link rel="stylesheet" href="../static/confirmacion.css">
+    <style>
+        :root {
+            --primary-color: #ecdbd0;
+            --secondary-color: #000;
+            --success-color: #4CAF50;
+            --error-color: #F44336;
+            --font-family-sans: 'Verdana', 'Geneva', 'Tahoma', sans-serif;
+            --font-family-serif: 'Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', serif;
+        }
+
+        body {
+            font-family: var(--font-family-sans);
+            background-color: rgba(255, 255, 255, 0.74);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            font-family: var(--font-family-sans);
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-family: var(--font-family-serif);
+            color: var(--secondary-color);
+            margin: 5px 0;
+        }
+
+        .success-message {
+            color: var(--success-color);
+        }
+
+        .error-message {
+            color: var(--error-color);
+        }
+
+        .btn-volver {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            text-decoration: none;
+            font-family: var(--font-family-sans);
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-volver:hover {
+            background-color: #444;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
