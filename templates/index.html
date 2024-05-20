@@ -3,10 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ferramas Main</title>
+    <title>Ferramas</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background-color: rgba(58, 37, 10, 0.74);
+            margin-bottom: auto;
+        }
+        input{
+            border: 1px solid #000000;
+            padding: 10px;
+            margin: 2px 0;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        h1{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        h2{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
         .container {
             max-width: 800px;
@@ -14,7 +28,7 @@
             padding: 20px;
         }
         .item {
-            border: 1px solid #ccc;
+            border: 1px solid #000000;
             padding: 10px;
             margin: 10px 0;
         }
@@ -25,13 +39,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>Ferramas Main</h1>
+        <h1>Ferramas</h1><br><br><br>
+
+        <h2>Lista de productos</h2>
         <form id="addItemForm">
-            <input type="text" id="nombre" placeholder="nombre" required>
-            <input type="number" id="precio" placeholder="precio" required>
-            <input type="text" id="descripcion" placeholder="descripcion" required>
-            <input type="number" id="stock" placeholder="stock" required>
-            <input type="text" id="categoria" placeholder="categoria" required>
+            <input type="text" id="nombre" placeholder="Nombre" required>
+            <input type="number" id="precio" placeholder="Precio" required>
+            <input type="text" id="descripcion" placeholder="Descripcion" required>
+            <input type="number" id="stock" placeholder="Stock" required>
+            <input type="text" id="categoria" placeholder="Categoria" required>
             <button type="submit">Agregar producto</button>
         </form>
         <h2>Productos</h2>
